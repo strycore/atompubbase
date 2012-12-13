@@ -1,0 +1,144 @@
+   
+* { 
+    margin: 0;
+    padding: 0;
+}
+
+
+body {
+    color: #000000;
+    background: #FFF;
+    font-family: Arial, Helvetica, Sans Serif;
+    line-height: 1.3em; 
+    font-size: 100%;
+    padding: 1em;
+}
+
+h1 {
+   padding: 0.5em;
+   border-bottom: solid 3px #ddd;
+}
+img  {
+	border:       0px solid white;
+	color:        white;
+	border-width: 0;
+	vertical-align: top;
+}
+
+span.Log { 
+   display: none 
+}
+
+h2,
+p {
+   padding-top: 0.5em;
+   padding-bottom: 0.5em;
+   
+}
+
+.legend {
+   float: right;
+   border: solid black 1px;
+   background: #DEF;
+   padding-left: 1em;   
+   padding-right: 1em;
+   padding-bottom: 1em;
+   font-size: 80%;
+}
+
+.legend h3 {
+   padding: 1em 0em;
+}
+
+li {
+   margin-bottom: 0.3em;
+}
+
+ul,
+ol {
+   margin-left: 2em;
+}
+
+a,
+a:link,
+a:active,
+a:visited,
+a:hover
+{
+    color: #000;
+    border-bottom: solid #a4b7ab 2px;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #555;
+    border-bottom: solid #ccc 2px;
+}
+
+h2 a, 
+h2 a:link,
+h2 a:active,
+h2 a:visited
+{
+    border-bottom: solid #a4b7ab 2px;
+}
+
+
+dt {
+    font-weight: bold;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+dd {
+    padding-left: 1em;
+}
+
+
+ins {
+	background-color: rgb(255, 255, 0);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+blockquote {
+	font-style: italic; 
+}
+
+blockquote p {
+	margin-left: 0.5em;
+}
+
+code {
+        color: green;
+}
+
+abbr, acronym, .help {
+        border-bottom: 1px dotted #333;
+        cursor:        help;
+}
+
+table {
+    font-size: 10pt;
+    font-family: Verdana, Arial, Helvetica, sans-serif; 
+}
+
+input {
+    background-color: #ddd;
+}
+
+td, th {
+    padding: 0.1em 0.3em;
+}
+ 
+th {
+	background-color: #f3ebdd;
+}
+
+
+table {
+    border: 0px none;
+}
+

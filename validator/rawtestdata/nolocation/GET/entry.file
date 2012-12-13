@@ -1,0 +1,34 @@
+status: 200
+content-length: 10590
+content-location: http://example.org/entry/
+-content-encoding: gzip
+vary: Accept-Encoding,User-Agent
+server: Apache
+connection: close
+etag: "ea1bc35ae1d997ec0256bcd6a090f6ea"
+date: Fri, 21 Mar 2008 19:25:34 GMT
+content-type: application/atom+xml; charset=utf-8
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app">
+   <title type="text">Test blog</title>
+   <link href="http://example.org/entry/" rel="self" />
+   <updated>2008-03-21T12:34:55.330195-04:00</updated>
+   <author>
+      <name>Joe Gregorio</name>
+   </author>
+   <id>http://example.org/</id>
+   <entry>
+     <title>Entry One</title>
+     <link rel="edit" href="http://example.org/entry/1/" />
+     <id>http://example.org/entry/1/</id>
+     <updated>2008-03-21T12:34:55.330195-04:00</updated>
+     <app:edited>2008-03-21T12:34:55.330195-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml"><p><i>My First Entry</i></p></div>
+         </content>
+   </entry>
+</feed>

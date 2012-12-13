@@ -1,0 +1,42 @@
+status: 200
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app">
+   <title type="text">BitWorking | Joe Gregorio</title>
+   <link href="http://bitworking.org/projects/apptestsite/app.cgi/service/entry/?page=1" rel="self" />
+   <link href="http://bitworking.org/" rel="alternate" />
+   <icon>http://bitworking.org/favicon.ico</icon>
+   <updated>2007-04-17T12:27:11.185299-04:00</updated>
+   <author>
+      <name>Joe Gregorio</name>
+   </author>
+   <id>http://bitworking.org/</id>
+   <entry>
+     <title>Test 2</title>
+     <link href="http://bitworking.org/news/42/Test" />
+     <link href="42/" rel="edit" />
+     <id>http://bitworking.org/news/42/Test</id>
+     <updated>2007-04-17T12:27:11.185299-04:00</updated>
+     <app:edited>2007-04-17T12:27:11.185299-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml">test</div>
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">Test entry</div>
+         </content>
+   </entry>
+   <entry>
+     <title>Test</title>
+     <link href="http://bitworking.org/news/41/Test" />
+     <link href="41/" rel="edit" />
+     <id>http://bitworking.org/news/41/Test</id>
+     <updated>2007-04-17T12:26:19.140065-04:00</updated>
+     <app:edited>2007-04-17T12:26:19.140065-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml">test</div>
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">Test entry</div>
+         </content>
+   </entry>
+</feed>

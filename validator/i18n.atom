@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+<title>Iñtërnâtiônàlizætiøn - %d</title>
+<id>tag:bitworking.org,2008-02-26:%s</id>
+<updated>2005-07-10T12:29:29Z</updated>
+<author>
+<name>Joe Gregorio</name>
+</author>
+<content type="xhtml">
+<div xmlns="http://www.w3.org/1999/xhtml">
+<p><i>A test of utf-8</i></p>
+</div>
+</content>
+</entry>

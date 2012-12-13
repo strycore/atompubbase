@@ -1,0 +1,21 @@
+status: 200
+content-length: 1104
+content-location: http://example.org/entry/
+vary: Accept-Encoding,User-Agent
+server: Apache
+connection: close
+-content-encoding: gzip
+date: Sun, 02 Mar 2008 16:11:06 GMT
+content-type: application/atomsvc+xml; charset=utf-8
+
+<?xml version="1.0" encoding="utf-8"?>
+<service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+    <atom:title>AtomPub Test Site</atom:title>
+      <collection href="http://example.org/entry/">
+           <atom:title>entry</atom:title>
+           <accept>application/atom+xml;type=entry</accept>
+         <categories fixed="yes" />
+      </collection>
+  </workspace>
+</service>

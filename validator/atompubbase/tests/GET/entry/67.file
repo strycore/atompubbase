@@ -1,0 +1,17 @@
+status: 200
+
+<?xml version="1.0" encoding="utf-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app">
+     <title>Atom-Powered Robots Run Amok</title>
+     <link href="http://bitworking.org/news/67/Atom-Powered-Robots-Run-Amok" />
+     <link href="." rel="edit" />
+     <id>http://bitworking.org/news/67/Atom-Powered-Robots-Run-Amok</id>
+     <updated>2007-05-08T06:27:02.977534-04:00</updated>
+     <app:edited>2007-05-08T06:27:02.977534-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+     <content type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml">Some <b>more</b> text.</div>
+     </content>
+</entry>

@@ -1,0 +1,292 @@
+status: 200
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app">
+   <title type="text">BitWorking | Joe Gregorio</title>
+   <link href="http://bitworking.org/projects/apptestsite/app.cgi/service/entry/" rel="self" />
+   <link href="http://bitworking.org/" rel="alternate" />
+   <link href="index.page.2.atom" rel="next" />
+   <icon>http://bitworking.org/favicon.ico</icon>
+   <updated>2007-05-08T06:27:02.977534-04:00</updated>
+   <author>
+      <name>Joe Gregorio</name>
+   </author>
+   <id>http://bitworking.org/</id>
+   <entry>
+     <title>Atom-Powered Robots Run Amok</title>
+     <link href="http://bitworking.org/news/67/Atom-Powered-Robots-Run-Amok" />
+     <link href="67" rel="edit" />
+     <id>http://bitworking.org/news/67/Atom-Powered-Robots-Run-Amok</id>
+     <updated>2007-05-08T06:27:02.977534-04:00</updated>
+     <app:edited>2007-05-08T06:27:02.977534-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+     <content/>  <!-- elided in the feed, will be present in the entry resource. -->
+   </entry><entry>
+     <title>Atom-Powered Robots Run Amok</title>
+     <link href="http://bitworking.org/news/66/Atom-Powered-Robots-Run-Amok" />
+     <link href="66" rel="edit" />
+     <id>http://bitworking.org/news/66/Atom-Powered-Robots-Run-Amok</id>
+     <updated>2007-05-08T06:19:26.187114-04:00</updated>
+     <app:edited>2007-05-08T06:19:26.187114-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">Some text.</div>
+         </content>
+   </entry><entry>
+     <title>Atom-Powered Robots Run Amok</title>
+     <link href="http://bitworking.org/news/65/Atom-Powered-Robots-Run-Amok" />
+     <link href="65/" rel="edit" />
+     <link href="65/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/65/Atom-Powered-Robots-Run-Amok</id>
+     <updated>2007-05-08T06:19:20.795606-04:00</updated>
+     <app:edited>2007-05-08T06:19:20.795606-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">Some text.</div>
+         </content>
+   </entry><entry>
+     <title>Atom-Powered Robots Run Amok</title>
+     <link href="http://bitworking.org/news/64/Atom-Powered-Robots-Run-Amok" />
+     <link href="64/" rel="edit" />
+     <link href="64/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/64/Atom-Powered-Robots-Run-Amok</id>
+     <updated>2007-05-08T04:49:09.291640-04:00</updated>
+     <app:edited>2007-05-08T04:49:09.291640-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">It's something moving... solid metal</div>
+         </content>
+   </entry><entry>
+     <title>Atom-Powered Robots Run Amok</title>
+     <link href="http://bitworking.org/news/63/Atom-Powered-Robots-Run-Amok" />
+     <link href="63/" rel="edit" />
+     <link href="63/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/63/Atom-Powered-Robots-Run-Amok</id>
+     <updated>2007-05-08T04:19:24.012167-04:00</updated>
+     <app:edited>2007-05-08T04:19:24.012167-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">It's something moving... solid metal</div>
+         </content>
+   </entry><entry>
+     <title>entry</title>
+     <link href="http://bitworking.org/news/60/entry" />
+     <link href="60/" rel="edit" />
+     <link href="60/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/60/entry</id>
+     <updated>2007-04-17T17:30:06.559639-04:00</updated>
+     <app:edited>2007-04-17T17:30:06.559639-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">cdivilly</div>
+         </content>
+   </entry><entry>
+     <title>entry</title>
+     <link href="http://bitworking.org/news/59/entry" />
+     <link href="59/" rel="edit" />
+     <link href="59/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/59/entry</id>
+     <updated>2007-04-17T17:30:03.420671-04:00</updated>
+     <app:edited>2007-04-17T17:30:03.420671-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">cdivilly</div>
+         </content>
+   </entry><entry>
+     <title>entry</title>
+     <link href="http://bitworking.org/news/58/entry" />
+     <link href="58/" rel="edit" />
+     <link href="58/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/58/entry</id>
+     <updated>2007-04-17T17:29:53.981404-04:00</updated>
+     <app:edited>2007-04-17T17:29:53.981404-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">cdivilly</div>
+         </content>
+   </entry><entry>
+     <title>entry</title>
+     <link href="http://bitworking.org/news/57/entry" />
+     <link href="57/" rel="edit" />
+     <link href="57/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/57/entry</id>
+     <updated>2007-04-17T17:29:51.471578-04:00</updated>
+     <app:edited>2007-04-17T17:29:51.471578-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">cdivilly</div>
+         </content>
+   </entry><entry>
+     <title>entry</title>
+     <link href="http://bitworking.org/news/56/entry" />
+     <link href="56/" rel="edit" />
+     <link href="56/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/56/entry</id>
+     <updated>2007-04-17T17:29:46.861822-04:00</updated>
+     <app:edited>2007-04-17T17:29:46.861822-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">cdivilly</div>
+         </content>
+   </entry><entry>
+     <title>entry</title>
+     <link href="http://bitworking.org/news/55/entry" />
+     <link href="55/" rel="edit" />
+     <link href="55/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/55/entry</id>
+     <updated>2007-04-17T17:29:41.145091-04:00</updated>
+     <app:edited>2007-04-17T17:29:41.145091-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">cdivilly</div>
+         </content>
+   </entry><entry>
+     <title>entry</title>
+     <link href="http://bitworking.org/news/54/entry" />
+     <link href="54/" rel="edit" />
+     <link href="54/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/54/entry</id>
+     <updated>2007-04-17T17:29:36.802494-04:00</updated>
+     <app:edited>2007-04-17T17:29:36.802494-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">cdivilly</div>
+         </content>
+   </entry><entry>
+     <title>entry</title>
+     <link href="http://bitworking.org/news/53/entry" />
+     <link href="53/" rel="edit" />
+     <link href="53/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/53/entry</id>
+     <updated>2007-04-17T17:29:33.447854-04:00</updated>
+     <app:edited>2007-04-17T17:29:33.447854-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">cdivilly</div>
+         </content>
+   </entry><entry>
+     <title>entry</title>
+     <link href="http://bitworking.org/news/52/entry" />
+     <link href="52/" rel="edit" />
+     <link href="52/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/52/entry</id>
+     <updated>2007-04-17T17:29:28.713274-04:00</updated>
+     <app:edited>2007-04-17T17:29:28.713274-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">cdivilly</div>
+         </content>
+   </entry><entry>
+     <title>entry</title>
+     <link href="http://bitworking.org/news/51/entry" />
+     <link href="51/" rel="edit" />
+     <link href="51/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/51/entry</id>
+     <updated>2007-04-17T17:29:25.132612-04:00</updated>
+     <app:edited>2007-04-17T17:29:25.132612-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">cdivilly</div>
+         </content>
+   </entry><entry>
+     <title>entry</title>
+     <link href="http://bitworking.org/news/50/entry" />
+     <link href="50/" rel="edit" />
+     <link href="50/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/50/entry</id>
+     <updated>2007-04-17T17:29:17.912955-04:00</updated>
+     <app:edited>2007-04-17T17:29:17.912955-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">cdivilly</div>
+         </content>
+   </entry><entry>
+     <title>wlw test post</title>
+     <link href="http://bitworking.org/news/47/wlw-test-post" />
+     <link href="47/" rel="edit" />
+     <link href="47/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/47/wlw-test-post</id>
+     <updated>2007-04-17T17:14:26.822735-04:00</updated>
+     <app:edited>2007-04-17T17:14:26.822735-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml"><p>hello</p></div>
+         </content>
+   </entry><entry>
+     <title>Entry 1</title>
+     <link href="http://bitworking.org/news/46/cdivilly-curl-test" />
+     <link href="46/" rel="edit" />
+     <link href="46/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/46/cdivilly-curl-test</id>
+     <updated>2007-04-17T16:52:43.750106-04:00</updated>
+     <app:edited>2007-04-17T16:52:43.750106-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">Some single text.</div>
+         </content>
+   </entry><entry>
+     <title>Test</title>
+     <link href="http://bitworking.org/news/44/Test" />
+     <link href="44/" rel="edit" />
+     <link href="44/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/44/Test</id>
+     <updated>2007-04-17T12:28:33.506858-04:00</updated>
+     <app:edited>2007-04-17T12:28:33.506858-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml">test</div>
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">Test entry</div>
+         </content>
+   </entry><entry>
+     <title>Test</title>
+     <link href="http://bitworking.org/news/43/Test" />
+     <link href="43/" rel="edit" />
+     <link href="43/;media" rel="edit-media" />
+     <id>http://bitworking.org/news/43/Test</id>
+     <updated>2007-04-17T12:28:02.507514-04:00</updated>
+     <app:edited>2007-04-17T12:28:02.507514-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml">test</div>
+     </summary>
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml">Test entry</div>
+         </content>
+   </entry>
+</feed>

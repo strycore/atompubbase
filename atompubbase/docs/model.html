@@ -1,0 +1,310 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module model</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>model</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/web/script/jcgregorio/bitworking.org/projects/apptestsuite/client/atompubbase/model.py">/web/script/jcgregorio/bitworking.org/projects/apptestsuite/client/atompubbase/model.py</a></font></td></tr></table>
+    <p><tt>There&nbsp;are&nbsp;four&nbsp;classes&nbsp;that&nbsp;make&nbsp;up&nbsp;the&nbsp;core<br>
+of&nbsp;the&nbsp;atompub&nbsp;model.<br>
+&nbsp;<br>
+class&nbsp;<a href="#Context">Context</a><br>
+class&nbsp;<a href="#Service">Service</a><br>
+class&nbsp;<a href="#Collection">Collection</a><br>
+class&nbsp;<a href="#Entry">Entry</a><br>
+&nbsp;<br>
+<a href="#Context">Context</a>&nbsp;represents&nbsp;the&nbsp;current&nbsp;state,&nbsp;as&nbsp;represented<br>
+by&nbsp;a&nbsp;service&nbsp;document,&nbsp;a&nbsp;collection&nbsp;and&nbsp;an&nbsp;entry.<br>
+&nbsp;<br>
+Each&nbsp;atompub&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(<a href="#Service">Service</a>,&nbsp;<a href="#Collection">Collection</a>,&nbsp;or&nbsp;<a href="#Entry">Entry</a>)&nbsp;<br>
+is&nbsp;just&nbsp;instantiated&nbsp;with&nbsp;a&nbsp;URI&nbsp;(or&nbsp;with&nbsp;a&nbsp;<a href="#Context">Context</a>)<br>
+that&nbsp;it&nbsp;then&nbsp;uses&nbsp;to&nbsp;perform&nbsp;its&nbsp;work.&nbsp;Each&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;can&nbsp;produce<br>
+a&nbsp;list&nbsp;of&nbsp;URIs&nbsp;(actually&nbsp;<a href="#Context">Context</a>&nbsp;objects)&nbsp;(possibly&nbsp;filtered)&nbsp;<br>
+for&nbsp;the&nbsp;next&nbsp;level&nbsp;down.&nbsp;The&nbsp;only&nbsp;parsing&nbsp;done&nbsp;will&nbsp;be&nbsp;xpaths&nbsp;to<br>
+pick&nbsp;out&nbsp;URIs,&nbsp;e.g.&nbsp;collections&nbsp;from&nbsp;service&nbsp;documents.&nbsp;<br>
+Here&nbsp;is&nbsp;an&nbsp;example&nbsp;of&nbsp;how&nbsp;the&nbsp;classes&nbsp;are&nbsp;used&nbsp;together:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;Note&nbsp;that&nbsp;httplib2.Http&nbsp;is&nbsp;passed&nbsp;in&nbsp;so&nbsp;you&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;can&nbsp;pass&nbsp;in&nbsp;your&nbsp;own&nbsp;instrumented&nbsp;version,&nbsp;etc.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;from&nbsp;httplib2&nbsp;import&nbsp;Http<br>
+&nbsp;&nbsp;&nbsp;&nbsp;h&nbsp;=&nbsp;httplib2.Http()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;c&nbsp;=&nbsp;<a href="#Context">Context</a>(h,&nbsp;service_document_uri)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;service&nbsp;=&nbsp;<a href="#Service">Service</a>(c)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;collection&nbsp;=&nbsp;<a href="#Collection">Collection</a>(service.iter()[0])&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;=&nbsp;<a href="#Entry">Entry</a>(collection.iter()[0])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(headers,&nbsp;body)&nbsp;=&nbsp;entry.get()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;"&lt;entry&gt;...some&nbsp;updated&nbsp;stuff&nbsp;&lt;/entry&gt;"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;entry.put(body)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;saving&nbsp;and&nbsp;restoring&nbsp;is&nbsp;a&nbsp;matter&nbsp;of&nbsp;pickling/unpickling&nbsp;the&nbsp;<a href="#Context">Context</a>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;pickle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;f&nbsp;=&nbsp;file("somefile",&nbsp;"w")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;pickle.dump(entry.context(),&nbsp;f)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;pickle<br>
+&nbsp;&nbsp;&nbsp;&nbsp;f&nbsp;=&nbsp;file("somefile",&nbsp;"r")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;context&nbsp;=&nbsp;pickle.load(f)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;You&nbsp;pass&nbsp;the&nbsp;class&nbsp;names&nbsp;into&nbsp;restore()&nbsp;for&nbsp;it&nbsp;to&nbsp;use&nbsp;to&nbsp;restore&nbsp;the&nbsp;context.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;(service,&nbsp;collection,&nbsp;entry)&nbsp;=&nbsp;context.restore(<a href="#Service">Service</a>,&nbsp;<a href="#Collection">Collection</a>,&nbsp;<a href="#Entry">Entry</a>)<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;You&nbsp;don't&nbsp;have&nbsp;to&nbsp;use&nbsp;the&nbsp;context,&nbsp;Entries<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;and&nbsp;Collections&nbsp;can&nbsp;be&nbsp;instantiated&nbsp;from&nbsp;URIs&nbsp;instead<br>
+&nbsp;&nbsp;&nbsp;&nbsp;#&nbsp;of&nbsp;<a href="#Context">Context</a>&nbsp;instances.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;entry&nbsp;=&nbsp;<a href="#Entry">Entry</a>(entry_edit_uri)</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="copy.html">copy</a><br>
+<a href="events.html">events</a><br>
+</td><td width="25%" valign=top><a href="httplib2.html">httplib2</a><br>
+<a href="mimeparse.mimeparse.html">mimeparse.mimeparse</a><br>
+</td><td width="25%" valign=top><a href="urlparse.html">urlparse</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="__builtin__.html#object">__builtin__.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="model.html#Collection">Collection</a>
+</font></dt><dt><font face="helvetica, arial"><a href="model.html#Context">Context</a>
+</font></dt><dt><font face="helvetica, arial"><a href="model.html#Entry">Entry</a>
+</font></dt><dt><font face="helvetica, arial"><a href="model.html#Service">Service</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Collection">class <strong>Collection</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Collection-__init__"><strong>__init__</strong></a>(self, context_or_uri)</dt><dd><tt>Create&nbsp;a&nbsp;<a href="#Collection">Collection</a>&nbsp;from&nbsp;either&nbsp;the&nbsp;URI&nbsp;of&nbsp;the<br>
+collection,&nbsp;or&nbsp;from&nbsp;a&nbsp;<a href="#Context">Context</a>&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Collection-context"><strong>context</strong></a>(self)</dt><dd><tt>The&nbsp;<a href="#Context">Context</a>&nbsp;associated&nbsp;with&nbsp;this&nbsp;<a href="#Collection">Collection</a>.</tt></dd></dl>
+
+<dl><dt><a name="Collection-create"><strong>create</strong></a>(self, headers<font color="#909090">=None</font>, body<font color="#909090">=None</font>)</dt><dd><tt>Create&nbsp;a&nbsp;new&nbsp;member&nbsp;in&nbsp;the&nbsp;collection.<br>
+Can&nbsp;be&nbsp;used&nbsp;to&nbsp;create&nbsp;members&nbsp;of&nbsp;regular<br>
+and&nbsp;media&nbsp;collections.&nbsp;Be&nbsp;sure&nbsp;to&nbsp;set&nbsp;the&nbsp;<br>
+'content-type'&nbsp;header&nbsp;appropriately.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;tuple&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;headers<br>
+and&nbsp;the&nbsp;body.</tt></dd></dl>
+
+<dl><dt><a name="Collection-entry_create"><strong>entry_create</strong></a>(self, headers<font color="#909090">=None</font>, body<font color="#909090">=None</font>)</dt><dd><tt>Convenience&nbsp;method&nbsp;that&nbsp;returns&nbsp;an&nbsp;<a href="#Entry">Entry</a>&nbsp;<a href="__builtin__.html#object">object</a><br>
+if&nbsp;the&nbsp;create&nbsp;has&nbsp;succeeded,&nbsp;or&nbsp;None&nbsp;if&nbsp;it&nbsp;fails.</tt></dd></dl>
+
+<dl><dt><a name="Collection-etree"><strong>etree</strong></a>(self)</dt><dd><tt>Returns&nbsp;an&nbsp;ElementTree&nbsp;representation&nbsp;of&nbsp;the&nbsp;<br>
+current&nbsp;page&nbsp;of&nbsp;the&nbsp;collection.</tt></dd></dl>
+
+<dl><dt><a name="Collection-get"><strong>get</strong></a>(self, headers<font color="#909090">=None</font>, body<font color="#909090">=None</font>)</dt><dd><tt>Retrieves&nbsp;the&nbsp;first&nbsp;feed&nbsp;in&nbsp;a&nbsp;paged&nbsp;series&nbsp;of&nbsp;<br>
+collection&nbsp;documents.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;tuple&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;headers<br>
+and&nbsp;the&nbsp;body.</tt></dd></dl>
+
+<dl><dt><a name="Collection-get_next"><strong>get_next</strong></a>(self, headers<font color="#909090">=None</font>, body<font color="#909090">=None</font>)</dt><dd><tt>Collections&nbsp;can&nbsp;be&nbsp;paged&nbsp;across&nbsp;many<br>
+Atom&nbsp;feeds.&nbsp;Get's&nbsp;the&nbsp;next&nbsp;feed&nbsp;in&nbsp;the<br>
+paging.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;tuple&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;headers<br>
+and&nbsp;the&nbsp;body.</tt></dd></dl>
+
+<dl><dt><a name="Collection-has_next"><strong>has_next</strong></a>(self)</dt><dd><tt>Collections&nbsp;can&nbsp;be&nbsp;paged&nbsp;across&nbsp;many<br>
+Atom&nbsp;feeds.&nbsp;Returns&nbsp;True&nbsp;if&nbsp;there&nbsp;is&nbsp;a&nbsp;<br>
+'next'&nbsp;feed&nbsp;we&nbsp;can&nbsp;get.</tt></dd></dl>
+
+<dl><dt><a name="Collection-iter"><strong>iter</strong></a>(self)</dt><dd><tt>Returns&nbsp;in&nbsp;iterable&nbsp;that&nbsp;produces&nbsp;a&nbsp;<a href="#Context">Context</a>&nbsp;<br>
+<a href="__builtin__.html#object">object</a>&nbsp;for&nbsp;every&nbsp;<a href="#Entry">Entry</a>&nbsp;in&nbsp;the&nbsp;collection.</tt></dd></dl>
+
+<dl><dt><a name="Collection-iter_entry"><strong>iter_entry</strong></a>(self)</dt><dd><tt>Returns&nbsp;in&nbsp;iterable&nbsp;that&nbsp;produces&nbsp;an&nbsp;elementtree<br>
+<a href="#Entry">Entry</a>&nbsp;for&nbsp;every&nbsp;<a href="#Entry">Entry</a>&nbsp;in&nbsp;the&nbsp;collection.&nbsp;Note&nbsp;that&nbsp;this<br>
+<a href="#Entry">Entry</a>&nbsp;is&nbsp;the&nbsp;possibly&nbsp;incomplete&nbsp;<a href="#Entry">Entry</a>&nbsp;in&nbsp;the&nbsp;collection<br>
+feed.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'Collection' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Context">class <strong>Context</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>Encapsulates&nbsp;the&nbsp;current&nbsp;service&nbsp;documents,<br>
+the&nbsp;current&nbsp;collection&nbsp;and&nbsp;the&nbsp;current&nbsp;<br>
+entry.&nbsp;Can&nbsp;be&nbsp;picked&nbsp;and&nbsp;un-pickled&nbsp;to<br>
+achieve&nbsp;persistence&nbsp;of&nbsp;context.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Context-__init__"><strong>__init__</strong></a>(self, http<font color="#909090">=None</font>, service<font color="#909090">=None</font>, collection<font color="#909090">=None</font>, entry<font color="#909090">=None</font>)</dt><dd><tt>http&nbsp;is&nbsp;either&nbsp;an&nbsp;instance&nbsp;of&nbsp;httplib2.Http()&nbsp;or&nbsp;something&nbsp;that&nbsp;<br>
+acts&nbsp;like&nbsp;it.&nbsp;For&nbsp;this&nbsp;module&nbsp;the&nbsp;only&nbsp;tow&nbsp;functions&nbsp;that&nbsp;need&nbsp;to&nbsp;<br>
+be&nbsp;implemented&nbsp;are&nbsp;request()&nbsp;and&nbsp;add_credentials().</tt></dd></dl>
+
+<dl><dt><a name="Context-collpop"><strong>collpop</strong></a>(self)</dt><dd><tt>See&nbsp;collpush.</tt></dd></dl>
+
+<dl><dt><a name="Context-collpush"><strong>collpush</strong></a>(self, uri)</dt><dd><tt>The&nbsp;collpush&nbsp;and&nbsp;collpop&nbsp;members&nbsp;are&nbsp;similar&nbsp;to&nbsp;the<br>
+command&nbsp;line&nbsp;'pushd'&nbsp;and&nbsp;'popd'&nbsp;commands.&nbsp;They&nbsp;let&nbsp;you<br>
+change&nbsp;to&nbsp;a&nbsp;different&nbsp;collection&nbsp;and&nbsp;then&nbsp;pop&nbsp;back<br>
+to&nbsp;the&nbsp;older&nbsp;collection&nbsp;when&nbsp;you&nbsp;are&nbsp;done.</tt></dd></dl>
+
+<dl><dt><a name="Context-restore"><strong>restore</strong></a>(self, service_type, collection_type, entry_type)</dt><dd><tt>Restore&nbsp;the&nbsp;state&nbsp;from&nbsp;a&nbsp;<a href="#Context">Context</a>.&nbsp;The&nbsp;types&nbsp;of&nbsp;the&nbsp;objects<br>
+to&nbsp;be&nbsp;instantiated&nbsp;for&nbsp;the&nbsp;service,&nbsp;collection&nbsp;and&nbsp;entry&nbsp;<br>
+are&nbsp;passed&nbsp;in.&nbsp;If&nbsp;no&nbsp;URI&nbsp;is&nbsp;set&nbsp;for&nbsp;a&nbsp;specific&nbsp;level&nbsp;<br>
+then&nbsp;None&nbsp;is&nbsp;returned&nbsp;for&nbsp;that&nbsp;instance.</tt></dd></dl>
+
+<hr>
+Properties defined here:<br>
+<dl><dt><strong>collection</strong></dt>
+<dd><tt>The&nbsp;URI&nbsp;of&nbsp;the&nbsp;collection.&nbsp;None&nbsp;if&nbsp;not&nbsp;set&nbsp;yet.</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _get_collection(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _set_collection(self, collection)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>entry</strong></dt>
+<dd><tt>The&nbsp;URI&nbsp;of&nbsp;the&nbsp;entry.&nbsp;None&nbsp;if&nbsp;not&nbsp;set&nbsp;yet.</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _get_entry(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _set_entry(self, entry)</dt></dl>
+</dd>
+</dl>
+<dl><dt><strong>service</strong></dt>
+<dd><tt>The&nbsp;URI&nbsp;of&nbsp;the&nbsp;Service&nbsp;Document.&nbsp;None&nbsp;if&nbsp;not&nbsp;set&nbsp;yet.</tt></dd>
+<dd><dl><dt><a name="-<em>get</em>"><strong><em>get</em></strong></a> = _get_service(self)</dt></dl>
+</dd>
+<dd><dl><dt><a name="-<em>set</em>"><strong><em>set</em></strong></a> = _set_service(self, service)</dt></dl>
+</dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'Context' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>http</strong> = None</dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Entry">class <strong>Entry</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Entry-__init__"><strong>__init__</strong></a>(self, context_or_uri)</dt><dd><tt>Create&nbsp;an&nbsp;<a href="#Entry">Entry</a>&nbsp;from&nbsp;either&nbsp;the&nbsp;URI&nbsp;of&nbsp;the<br>
+entry&nbsp;edit&nbsp;URI,&nbsp;or&nbsp;from&nbsp;a&nbsp;<a href="#Context">Context</a>&nbsp;<a href="__builtin__.html#object">object</a>.</tt></dd></dl>
+
+<dl><dt><a name="Entry-context"><strong>context</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="Entry-delete"><strong>delete</strong></a>(self, headers<font color="#909090">=None</font>, body<font color="#909090">=None</font>)</dt><dd><tt>Delete&nbsp;the&nbsp;entry&nbsp;from&nbsp;the&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="Entry-etree"><strong>etree</strong></a>(self)</dt><dd><tt>Returns&nbsp;an&nbsp;ElementTree&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="#Entry">Entry</a>.</tt></dd></dl>
+
+<dl><dt><a name="Entry-get"><strong>get</strong></a>(self, headers<font color="#909090">=None</font>, body<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;the&nbsp;representation&nbsp;for&nbsp;this&nbsp;entry.</tt></dd></dl>
+
+<dl><dt><a name="Entry-get_media"><strong>get_media</strong></a>(self, headers<font color="#909090">=None</font>, body<font color="#909090">=None</font>)</dt><dd><tt>If&nbsp;this&nbsp;entry&nbsp;is&nbsp;a&nbsp;Media&nbsp;Link&nbsp;<a href="#Entry">Entry</a>,&nbsp;then&nbsp;retrieve<br>
+the&nbsp;associated&nbsp;media.</tt></dd></dl>
+
+<dl><dt><a name="Entry-has_media"><strong>has_media</strong></a>(self)</dt><dd><tt>Returns&nbsp;True&nbsp;if&nbsp;this&nbsp;is&nbsp;a&nbsp;Media&nbsp;Link&nbsp;<a href="#Entry">Entry</a>.</tt></dd></dl>
+
+<dl><dt><a name="Entry-put"><strong>put</strong></a>(self, headers<font color="#909090">=None</font>, body<font color="#909090">=None</font>)</dt><dd><tt>Update&nbsp;the&nbsp;entry&nbsp;on&nbsp;the&nbsp;server.&nbsp;If&nbsp;the&nbsp;body&nbsp;to&nbsp;send<br>
+is&nbsp;not&nbsp;supplied&nbsp;then&nbsp;the&nbsp;internal&nbsp;elementtree&nbsp;element<br>
+will&nbsp;be&nbsp;serialized&nbsp;and&nbsp;sent&nbsp;to&nbsp;the&nbsp;server.</tt></dd></dl>
+
+<dl><dt><a name="Entry-put_media"><strong>put_media</strong></a>(self, headers<font color="#909090">=None</font>, body<font color="#909090">=None</font>)</dt><dd><tt>If&nbsp;this&nbsp;entry&nbsp;is&nbsp;a&nbsp;Media&nbsp;Link&nbsp;<a href="#Entry">Entry</a>,&nbsp;then&nbsp;update&nbsp;<br>
+the&nbsp;associated&nbsp;media.</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'Entry' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Service">class <strong>Service</strong></a>(<a href="__builtin__.html#object">__builtin__.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>An&nbsp;Atom&nbsp;Publishing&nbsp;Protocol&nbsp;<a href="#Service">Service</a>&nbsp;Document.<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Methods defined here:<br>
+<dl><dt><a name="Service-__init__"><strong>__init__</strong></a>(self, context_or_uri)</dt></dl>
+
+<dl><dt><a name="Service-context"><strong>context</strong></a>(self)</dt><dd><tt>Get&nbsp;the&nbsp;curent&nbsp;<a href="#Context">Context</a>&nbsp;associated&nbsp;with&nbsp;this&nbsp;<a href="#Service">Service</a>&nbsp;Document.</tt></dd></dl>
+
+<dl><dt><a name="Service-etree"><strong>etree</strong></a>(self)</dt><dd><tt>Returns&nbsp;an&nbsp;ElementTree&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="#Service">Service</a>&nbsp;Document.</tt></dd></dl>
+
+<dl><dt><a name="Service-get"><strong>get</strong></a>(self, headers<font color="#909090">=None</font>, body<font color="#909090">=None</font>)</dt><dd><tt>Retrieve&nbsp;the&nbsp;current&nbsp;<a href="#Service">Service</a>&nbsp;Document&nbsp;from&nbsp;the&nbsp;server.<br>
+&nbsp;<br>
+Returns&nbsp;a&nbsp;tuple&nbsp;of&nbsp;the&nbsp;HTTP&nbsp;response&nbsp;headers<br>
+and&nbsp;the&nbsp;body.</tt></dd></dl>
+
+<dl><dt><a name="Service-iter"><strong>iter</strong></a>(self)</dt><dd><tt>Returns&nbsp;a&nbsp;generator&nbsp;that&nbsp;iterates&nbsp;over&nbsp;all<br>
+the&nbsp;collections&nbsp;in&nbsp;the&nbsp;service&nbsp;document.</tt></dd></dl>
+
+<dl><dt><a name="Service-iter_match"><strong>iter_match</strong></a>(self, mimerange)</dt><dd><tt>Returns&nbsp;a&nbsp;generator&nbsp;that&nbsp;iterates&nbsp;over&nbsp;<br>
+the&nbsp;collections&nbsp;in&nbsp;the&nbsp;service&nbsp;document&nbsp;<br>
+that&nbsp;accept&nbsp;the&nbsp;given&nbsp;mimerange.&nbsp;The&nbsp;mimerange<br>
+can&nbsp;be&nbsp;a&nbsp;specific&nbsp;mimetype&nbsp;-&nbsp;"image/png"&nbsp;-&nbsp;or&nbsp;<br>
+a&nbsp;range&nbsp;-&nbsp;"image/*".</tt></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__dict__</strong> = &lt;dictproxy object&gt;<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dl>
+
+<dl><dt><strong>__weakref__</strong> = &lt;attribute '__weakref__' of 'Service' objects&gt;<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;<a href="__builtin__.html#object">object</a>&nbsp;(if&nbsp;defined)</tt></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-absolutize"><strong>absolutize</strong></a>(baseuri, uri)</dt><dd><tt>Given&nbsp;a&nbsp;baseuri,&nbsp;return&nbsp;the&nbsp;absolute<br>
+version&nbsp;of&nbsp;the&nbsp;given&nbsp;uri.&nbsp;Works&nbsp;whether<br>
+uri&nbsp;is&nbsp;relative&nbsp;or&nbsp;absolute.</tt></dd></dl>
+ <dl><dt><a name="-init_event_handlers"><strong>init_event_handlers</strong></a>()</dt><dd><tt>Add&nbsp;in&nbsp;hooks&nbsp;to&nbsp;the&nbsp;<a href="#Service">Service</a>,&nbsp;<a href="#Collection">Collection</a><br>
+and&nbsp;<a href="#Entry">Entry</a>&nbsp;classes&nbsp;to&nbsp;enable&nbsp;Events.</tt></dd></dl>
+ <dl><dt><a name="-link_value"><strong>link_value</strong></a>(etree, xpath, relation)</dt><dd><tt>Given&nbsp;and&nbsp;elementtree&nbsp;element&nbsp;'etree',&nbsp;find&nbsp;all&nbsp;link<br>
+elements&nbsp;under&nbsp;the&nbsp;given&nbsp;xpath&nbsp;and&nbsp;return&nbsp;the&nbsp;@href<br>
+of&nbsp;the&nbsp;link&nbsp;of&nbsp;the&nbsp;given&nbsp;relation.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>APP</strong> = 'http://www.w3.org/2007/app'<br>
+<strong>APP_COLL</strong> = '{http://www.w3.org/2007/app}collection'<br>
+<strong>APP_MEMBER_TYPE</strong> = '{http://www.w3.org/2007/app}accept'<br>
+<strong>ATOM</strong> = 'http://www.w3.org/2005/Atom'<br>
+<strong>ATOM_ENTRY</strong> = '{http://www.w3.org/2005/Atom}entry'<br>
+<strong>ATOM_TITLE</strong> = '{http://www.w3.org/2005/Atom}title'<br>
+<strong>LINK</strong> = '{http://www.w3.org/2005/Atom}link'<br>
+<strong>XHTML</strong> = 'http://www.w3.org/1999/xhtml'</td></tr></table>
+</body></html>

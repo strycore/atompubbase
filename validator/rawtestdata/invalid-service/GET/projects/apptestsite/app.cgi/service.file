@@ -1,0 +1,41 @@
+status: 200
+content-length: 1104
+content-location: http://bitworking.org/projects/apptestsite/app.cgi/service/;service_document
+vary: Accept-Encoding,User-Agent
+server: Apache
+connection: close
+-content-encoding: gzip
+date: Sun, 02 Mar 2008 16:11:06 GMT
+content-type: application/atomsvc+xml; charset=utf-8
+
+<?xml version="1.0" encoding="utf-8"?>
+service xmlns="http://www.w2.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom">
+  <workspace>
+    <atom:title>AtomPub Test Site</atom:title>
+      <collection href="entry/">
+           <atom:title>entry</atom:title>
+           <accept>application/atom+xml;type=entry</accept>
+         <categories fixed="yes" />
+      </collection>
+      <collection href="draft/">
+           <atom:title>draft</atom:title>
+           <accept>application/atom+xml;type=entry</accept>
+         <categories fixed="yes" />
+      </collection>
+      <collection href="trash/">
+           <atom:title>trash</atom:title>
+           <accept>application/atom+xml;type=entry</accept>
+         <categories fixed="yes" />
+      </collection>
+      <collection href="media/">
+           <atom:title>media</atom:title>
+        <accept>*/*</accept>
+         <categories fixed="yes" />
+      </collection>
+      <collection href="trash/">
+           <atom:title>trash</atom:title>
+        <accept>*/*</accept>
+         <categories fixed="yes" />
+      </collection>
+  </workspace>
+</service>

@@ -1,0 +1,26 @@
+status: 201
+content-length: 759
+vary: Accept-Encoding,User-Agent
+server: Apache
+connection: close
+etag: "4f49f88f3dc4ce2c1317dbcfe7091dc6"
+date: Fri, 21 Mar 2008 19:25:35 GMT
+content-type: application/atom+xml; charset=utf-8
+
+<?xml version="1.0" encoding="utf-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app">
+     <title>Iñtërnâtiônàlizætiøn - 1</title>
+     <id>http://example.org/entry/2/</id>
+     <author>
+        <name>Joe Gregorio</name>
+     </author>
+     <updated>2008-03-21T15:25:38.155461-04:00</updated>
+     <app:edited>2008-03-21T15:25:38.155461-04:00</app:edited>
+     <summary type="xhtml">
+          <div xmlns="http://www.w3.org/1999/xhtml" />
+     </summary>
+     <link href="http://example.org/entry/2/" rel="edit" />
+         <content type="xhtml">
+              <div xmlns="http://www.w3.org/1999/xhtml"><p><i>A test of utf-8</i></p></div>
+         </content>
+</entry>

@@ -1,0 +1,116 @@
+
+<!doctype html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module events</title>
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>events</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/web/script/jcgregorio/bitworking.org/projects/apptestsuite/client/atompubbase/events.py">/web/script/jcgregorio/bitworking.org/projects/apptestsuite/client/atompubbase/events.py</a></font></td></tr></table>
+    <p><tt>An&nbsp;eventing&nbsp;system&nbsp;for&nbsp;atompubbase&nbsp;objects.<br>
+Each&nbsp;class&nbsp;that&nbsp;is&nbsp;registered&nbsp;with&nbsp;<a href="#-add_event_handlers">add_event_handlers</a>()<br>
+will&nbsp;be&nbsp;hooked&nbsp;into&nbsp;the&nbsp;event&nbsp;system.&nbsp;Clients&nbsp;can&nbsp;then<br>
+register&nbsp;for&nbsp;callbacks&nbsp;when&nbsp;a&nbsp;member&nbsp;function&nbsp;is&nbsp;called,<br>
+filtering&nbsp;on&nbsp;when&nbsp;to&nbsp;trigger&nbsp;the&nbsp;callback.&nbsp;There<br>
+are&nbsp;several&nbsp;axes&nbsp;that&nbsp;can&nbsp;be&nbsp;used&nbsp;to&nbsp;filter&nbsp;on:<br>
+&nbsp;<br>
+Time&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRE|POST<br>
+Method&nbsp;Name&nbsp;&nbsp;&nbsp;GET|PUT|DELETE|CREATE<br>
+Media&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MEDIA|NEXT<br>
+Class&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SERVICE|COLLECTION|ENTRY<br>
+&nbsp;<br>
+Note&nbsp;that&nbsp;Class&nbsp;is&nbsp;really&nbsp;driven&nbsp;by&nbsp;which<br>
+classes&nbsp;use&nbsp;the&nbsp;eventing&nbsp;system.&nbsp;Media&nbsp;is&nbsp;triggered<br>
+if&nbsp;the&nbsp;method&nbsp;name&nbsp;ends&nbsp;in&nbsp;"_media".<br>
+For&nbsp;example,&nbsp;given&nbsp;the&nbsp;following&nbsp;class:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;Entry(object):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;get(self,&nbsp;headers,&nbsp;body&nbsp;=&nbsp;None):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;put_media(self,&nbsp;headers,&nbsp;body&nbsp;=&nbsp;None):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+&nbsp;<br>
+It&nbsp;can&nbsp;be&nbsp;added&nbsp;to&nbsp;the&nbsp;event&nbsp;system&nbsp;by&nbsp;calling:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-add_event_handlers">add_event_handlers</a>(Entry)<br>
+&nbsp;<br>
+Now&nbsp;you&nbsp;can&nbsp;register&nbsp;callbacks&nbsp;for&nbsp;when&nbsp;methods&nbsp;of&nbsp;instances<br>
+of&nbsp;the&nbsp;class&nbsp;Entry&nbsp;are&nbsp;called.&nbsp;For&nbsp;example:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;mycb(headers,&nbsp;body,&nbsp;attributes):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-register_callback">register_callback</a>("PRE_ENTRY",&nbsp;mycb)<br>
+&nbsp;<br>
+The&nbsp;'mycb'&nbsp;callback&nbsp;will&nbsp;be&nbsp;called&nbsp;before&nbsp;any<br>
+method&nbsp;is&nbsp;called&nbsp;in&nbsp;the&nbsp;Entry&nbsp;class.&nbsp;The&nbsp;headers<br>
+and&nbsp;body&nbsp;parameters&nbsp;will&nbsp;be&nbsp;passed&nbsp;along.&nbsp;The<br>
+headers&nbsp;can&nbsp;be&nbsp;changed&nbsp;by&nbsp;the&nbsp;callback.<br>
+You&nbsp;can&nbsp;construct&nbsp;a&nbsp;filter&nbsp;string&nbsp;by&nbsp;selecting&nbsp;zero<br>
+or&nbsp;one&nbsp;value&nbsp;across&nbsp;each&nbsp;axis&nbsp;and&nbsp;concatenating<br>
+them&nbsp;with&nbsp;underscores,&nbsp;order&nbsp;is&nbsp;not&nbsp;important.<br>
+PRE&nbsp;calls&nbsp;contain&nbsp;the&nbsp;header&nbsp;and&nbsp;body&nbsp;of&nbsp;the&nbsp;request,<br>
+POST&nbsp;calls&nbsp;contain&nbsp;the&nbsp;header&nbsp;and&nbsp;body&nbsp;of&nbsp;the&nbsp;response.<br>
+If&nbsp;you&nbsp;wish&nbsp;to&nbsp;receive&nbsp;all&nbsp;the&nbsp;events&nbsp;then&nbsp;register&nbsp;<br>
+with&nbsp;the&nbsp;ANY&nbsp;filter.<br>
+&nbsp;<br>
+Presuming&nbsp;registered&nbsp;classes:<br>
+&nbsp;&nbsp;class&nbsp;Service:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;get(headers,&nbsp;body=None):&nbsp;pass<br>
+&nbsp;&nbsp;class&nbsp;Entry:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;get(headers,&nbsp;body=None):&nbsp;pass<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;get_media(headers,&nbsp;body=None):&nbsp;pass<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;delete(headers,&nbsp;body=None):&nbsp;pass<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;put(headers,&nbsp;body):&nbsp;pass<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;put_media(headers,&nbsp;body):&nbsp;pass<br>
+&nbsp;&nbsp;class&nbsp;Collection:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;get(headers,&nbsp;body=None):&nbsp;pass<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;create(headers,&nbsp;body):&nbsp;pass<br>
+&nbsp;<br>
+These&nbsp;are&nbsp;all&nbsp;valid&nbsp;filters:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PRE_GET_MEDIA&nbsp;&nbsp;&nbsp;-&nbsp;Called&nbsp;before&nbsp;Entry.get_media()&nbsp;is&nbsp;called<br>
+&nbsp;&nbsp;&nbsp;&nbsp;PRE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Called&nbsp;before&nbsp;any&nbsp;classes&nbsp;member&nbsp;function&nbsp;is&nbsp;called.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;COLLECTION&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Called&nbsp;before&nbsp;any&nbsp;Collection&nbsp;classes&nbsp;member&nbsp;function&nbsp;is&nbsp;called.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;POST_COLLECTION&nbsp;-&nbsp;Called&nbsp;after&nbsp;any&nbsp;Collection&nbsp;classes&nbsp;member&nbsp;function&nbsp;is&nbsp;called.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;POST_COLLECTION_CREATE&nbsp;-&nbsp;Called&nbsp;after&nbsp;Collection.create()&nbsp;is&nbsp;called.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ANY&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;Called&nbsp;before&nbsp;and&nbsp;after&nbsp;every&nbsp;classes&nbsp;member&nbsp;function&nbsp;is&nbsp;called.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#fffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top></td><td width="25%" valign=top></td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-add_event_handlers"><strong>add_event_handlers</strong></a>(theclass)</dt><dd><tt>Wrap&nbsp;each&nbsp;callable&nbsp;non-internal&nbsp;member&nbsp;function&nbsp;of&nbsp;the&nbsp;class<br>
+with&nbsp;a&nbsp;wrapper&nbsp;function&nbsp;that&nbsp;calls&nbsp;into&nbsp;the&nbsp;eventing&nbsp;system.</tt></dd></dl>
+ <dl><dt><a name="-clear"><strong>clear</strong></a>()</dt><dd><tt>Unregister&nbsp;all&nbsp;callbacks.</tt></dd></dl>
+ <dl><dt><a name="-register_callback"><strong>register_callback</strong></a>(filter, cb)</dt><dd><tt>Add&nbsp;a&nbsp;callback&nbsp;(cb)&nbsp;to&nbsp;be&nbsp;called&nbsp;when&nbsp;it&nbsp;matches<br>
+the&nbsp;filter.&nbsp;The&nbsp;filter&nbsp;is&nbsp;a&nbsp;string&nbsp;of&nbsp;attibute&nbsp;<br>
+names&nbsp;separated&nbsp;by&nbsp;underscores.<br>
+&nbsp;<br>
+Example:<br>
+&nbsp;&nbsp;<a href="#-register_callback">register_callback</a>("PRE_ENTRY",&nbsp;mycb)<br>
+&nbsp;<br>
+The&nbsp;'mycb'&nbsp;callback&nbsp;will&nbsp;be&nbsp;called&nbsp;before&nbsp;any<br>
+method&nbsp;is&nbsp;called&nbsp;in&nbsp;the&nbsp;Entry&nbsp;class.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['add_event_handlers', 'register_callback', 'clear']</td></tr></table>
+</body></html>

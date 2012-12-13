@@ -1,0 +1,21 @@
+status: 200
+
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app">
+   <title type="text">My Test Media Collection</title>
+   <updated>2007-05-08T06:27:02.977534-04:00</updated>
+   <author>
+      <name>Joe Gregorio</name>
+   </author>
+   <id>http://bitworking.org/</id>
+   <entry>
+     <title>A Trip to the beach</title>
+     <link href="77" rel="edit" />
+     <link href="/media/waves.jpg" rel="edit-media" />
+     <id>http://example.org/media/waves.jpg</id>
+     <updated>2007-05-08T06:27:02.977534-04:00</updated>
+     <app:edited>2007-05-08T06:27:02.977534-04:00</app:edited>
+     <summary/>
+     <content/> 
+   </entry>
+</feed>
