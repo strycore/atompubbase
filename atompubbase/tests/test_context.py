@@ -1,7 +1,7 @@
 import unittest
 from model import Context
 import pickle
-from StringIO import StringIO 
+from StringIO import StringIO
 
 
 class Test(unittest.TestCase):
@@ -19,8 +19,9 @@ class Test(unittest.TestCase):
         self.assertEqual(c.collection, "http://example.org/collection/2/")
         self.assertEqual(c.entry, None)
 
-        c.service = "http://example.org/some_other_service.atomsvc"
-        self.assertEqual(c.service, "http://example.org/some_other_service.atomsvc")
+        service_url = "http://example.org/some_other_service.atomsvc"
+        c.service = service_url
+        self.assertEqual(c.service, service_url)
         self.assertEqual(c.collection, None)
         self.assertEqual(c.entry, None)
 
@@ -29,14 +30,14 @@ class Test(unittest.TestCase):
         c.service = "http://example.org/service.atomsvc"
         c.collection = "http://example.org/collection/1/"
         c.entry = "http://example.org/collection/1/1"
-    
+
         c.collpush("http://fred.org/")
 
         # Test pickle and un-pickle while were at it.
-        file = StringIO()
-        pickle.dump(c, file)
-        file.seek(0)
-        c = pickle.load(file)
+        file_handle = StringIO()
+        pickle.dump(c, file_handle)
+        file_handle.seek(0)
+        c = pickle.load(file_handle)
 
         self.assertEqual(c.collection, "http://fred.org/")
         self.assertEqual(c.entry, None)
@@ -61,7 +62,7 @@ class Test(unittest.TestCase):
         ctxt.service = "http://example.org/service.atomsvc"
         ctxt.collection = "http://example.org/collection/1/"
         ctxt.entry = "http://example.org/collection/1/1"
- 
+
         a, b, c = ctxt.restore(A, B, C)
         self.assertEqual(type(a), A)
         self.assertEqual(type(b), B)
@@ -74,7 +75,5 @@ class Test(unittest.TestCase):
         self.assertEqual(c, None)
 
 
-
 if __name__ == "__main__":
     unittest.main()
-
